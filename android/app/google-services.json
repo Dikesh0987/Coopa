@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582671918403",
+    "project_id": "coopa0987",
+    "storage_bucket": "coopa0987.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582671918403:android:5eec295386712a527f3bf6",
+        "android_client_info": {
+          "package_name": "com.example.coopa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582671918403-bhga79fgpefbjhe6qfr5b8i1lbl9mgn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBurXN_bUPS7HXvYbKBEMiTGMYZlamdxVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582671918403-bhga79fgpefbjhe6qfr5b8i1lbl9mgn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
