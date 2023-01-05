@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:coopa/components/custom_surfix_icon.dart';
 import 'package:coopa/components/default_button.dart';
 import 'package:coopa/components/form_error.dart';
-import 'package:coopa/screens/otp/otp_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -20,9 +19,10 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String?> errors = [];
 
-  String? firstname;
-  String? secondname;
-  String? phone;
+  String? firstName;
+  String? secondName;
+  String? phoneNumber;
+  // ignore: non_constant_identifier_names
   String? address;
 
   final firstnameEditingController = TextEditingController();
@@ -105,7 +105,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
       keyboardType: TextInputType.phone,
-      onSaved: (newValue) => phone = newValue,
+      onSaved: (newValue) => phoneNumber = newValue,
       controller: phoneEditingController,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -134,7 +134,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   TextFormField buildLastNameFormField() {
     return TextFormField(
-      onSaved: (newValue) => secondname = newValue,
+      onSaved: (newValue) => secondName = newValue,
       controller: secondnameEditingController,
       onChanged: (value) {
         secondnameEditingController == value;
@@ -152,7 +152,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   TextFormField buildFirstNameFormField() {
     return TextFormField(
-      onSaved: (newValue) => firstname = newValue,
+      onSaved: (newValue) => firstName = newValue,
       controller: firstnameEditingController,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -192,12 +192,11 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
     userModel.address = addressEditingController.text;
 
     await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap());
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false);
+        .collection("users").doc(user.uid).set(userModel.toMap()).then((value) => {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  (route) => false)
+            });
   }
 }

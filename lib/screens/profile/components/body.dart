@@ -9,8 +9,35 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfilePic(),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  ProfilePic(),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Dikesh Netam",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text("dikeshnetam0987@gmail.com")
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
           SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
