@@ -1,3 +1,4 @@
+import 'package:coopa/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coopa/components/custom_surfix_icon.dart';
 import 'package:coopa/components/form_error.dart';
@@ -19,6 +20,7 @@ class _SignFormState extends State<SignForm> {
   String? email;
   String? password;
   bool? remember = false;
+  final AuthServices _auth = AuthServices();
   final List<String?> errors = [];
 
   void addError({String? error}) {

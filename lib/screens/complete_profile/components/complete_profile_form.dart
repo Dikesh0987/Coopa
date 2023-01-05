@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coopa/models/user_model.dart';
+import 'package:coopa/screens/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coopa/components/custom_surfix_icon.dart';
 import 'package:coopa/components/default_button.dart';
@@ -15,10 +19,18 @@ class CompleteProfileForm extends StatefulWidget {
 class _CompleteProfileFormState extends State<CompleteProfileForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String?> errors = [];
-  String? firstName;
-  String? lastName;
-  String? phoneNumber;
+
+  String? firstname;
+  String? secondname;
+  String? phone;
   String? address;
+
+  final firstnameEditingController = TextEditingController();
+  final secondnameEditingController = TextEditingController();
+  final phoneEditingController = TextEditingController();
+  final addressEditingController = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -52,9 +64,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           DefaultButton(
             text: "continue",
             press: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(context, OtpScreen.routeName);
-              }
+              insertDetails();
             },
           ),
         ],
@@ -65,9 +75,11 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
   TextFormField buildAddressFormField() {
     return TextFormField(
       onSaved: (newValue) => address = newValue,
+      controller: addressEditingController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kAddressNullError);
+          addressEditingController == value;
         }
         return null;
       },
@@ -93,10 +105,12 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
       keyboardType: TextInputType.phone,
-      onSaved: (newValue) => phoneNumber = newValue,
+      onSaved: (newValue) => phone = newValue,
+      controller: phoneEditingController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPhoneNumberNullError);
+          phoneEditingController == value;
         }
         return null;
       },
@@ -120,7 +134,11 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   TextFormField buildLastNameFormField() {
     return TextFormField(
-      onSaved: (newValue) => lastName = newValue,
+      onSaved: (newValue) => secondname = newValue,
+      controller: secondnameEditingController,
+      onChanged: (value) {
+        secondnameEditingController == value;
+      },
       decoration: InputDecoration(
         labelText: "Last Name",
         hintText: "Enter your last name",
@@ -134,10 +152,12 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   TextFormField buildFirstNameFormField() {
     return TextFormField(
-      onSaved: (newValue) => firstName = newValue,
+      onSaved: (newValue) => firstname = newValue,
+      controller: firstnameEditingController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kNameNullError);
+          firstnameEditingController == value;
         }
         return null;
       },
@@ -157,5 +177,27 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
+  }
+
+  insertDetails() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    userModel.uid = user!.uid;
+    userModel.firstname = firstnameEditingController.text;
+    userModel.secondname = secondnameEditingController.text;
+    userModel.phone = phoneEditingController.text;
+    userModel.address = addressEditingController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+        (route) => false);
   }
 }

@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:coopa/components/custom_surfix_icon.dart';
 import 'package:coopa/components/default_button.dart';
@@ -17,6 +21,9 @@ class _SignUpFormState extends State<SignUpForm> {
   String? email;
   String? password;
   String? conform_password;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController cpasswordController = TextEditingController();
   bool remember = false;
   final List<String?> errors = [];
 
@@ -33,7 +40,14 @@ class _SignUpFormState extends State<SignUpForm> {
         errors.remove(error);
       });
   }
+  void createAccount() async{
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String cpassword = cpasswordController.text.trim();
 
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    log("user created");
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,6 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
+                createAccount();
                 Navigator.pushNamed(context, CompleteProfileScreen.routeName);
               }
             },
@@ -66,6 +81,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => conform_password = newValue,
+      controller: cpasswordController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
@@ -98,6 +114,7 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
+      controller: passwordController,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -132,6 +149,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
+      controller: emailController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
