@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coopa/screens/cart/cart_screen.dart';
 import 'package:coopa/screens/home/components/body.dart';
 import 'package:coopa/screens/profile/profile_screen.dart';
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final Stream<QuerySnapshot> users =
+      FirebaseFirestore.instance.collection('users').snapshots();
   var _currentIndex = 0;
 
   final PageIndex = [Body(), TrandingScreen(), CartScreen(), ProfileScreen()];

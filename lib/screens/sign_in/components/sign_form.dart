@@ -1,4 +1,6 @@
+import 'package:coopa/screens/home/home_screen.dart';
 import 'package:coopa/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coopa/components/custom_surfix_icon.dart';
 import 'package:coopa/components/form_error.dart';
@@ -20,8 +22,44 @@ class _SignFormState extends State<SignForm> {
   String? email;
   String? password;
   bool? remember = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   final AuthServices _auth = AuthServices();
   final List<String?> errors = [];
+
+  userLogin() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+          (route) => false);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print("No User Found for that Email");
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "No User Found for that Email",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20.0),
+            )));
+      } else if (e.code == "wrong-password") {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Wrong Password",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18.0),
+            )));
+      }
+    }
+  }
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -79,7 +117,7 @@ class _SignFormState extends State<SignForm> {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                userLogin();
               }
             },
           ),
@@ -92,10 +130,12 @@ class _SignFormState extends State<SignForm> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => password = newValue,
+      controller: passwordController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
+          emailController == value;
+        } else if (value.length >= 6) {
           removeError(error: kShortPassError);
         }
         return null;
@@ -125,9 +165,11 @@ class _SignFormState extends State<SignForm> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
+      controller: emailController,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
+          emailController == value;
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
