@@ -42,7 +42,7 @@ List<Product> demoProducts = [
     price: 64.99,
     description: description,
     rating: 4.8,
-    isFavourite: true,
+    isFavourite: true, 
     isPopular: true,
   ),
   Product(

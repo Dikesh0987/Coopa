@@ -1,4 +1,5 @@
 import 'package:coopa/screens/cart/components/check_out_card.dart';
+import 'package:coopa/screens/home/components/fire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:coopa/models/Cart.dart';
@@ -50,6 +51,7 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
+         
         ],
       ),
     );

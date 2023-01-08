@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coopa/screens/notification/notification_screen.dart';
+import 'package:coopa/screens/orders/orders_screen.dart';
+import 'package:coopa/screens/settings/settings_screen.dart';
 import 'package:coopa/screens/splash/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +58,7 @@ class _BodyState extends State<Body> {
                                 Text(
                                   '${data['firstname']} ${data['secondname']}',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 18,overflow: TextOverflow.ellipsis,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -63,7 +66,7 @@ class _BodyState extends State<Body> {
                                 ),
                                 Text(
                                   "+91 ${data['phone']}",
-                                  style: TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 16),
                                 )
                               ],
                             ),
@@ -80,12 +83,29 @@ class _BodyState extends State<Body> {
                 ProfileMenu(
                   text: "Notifications",
                   icon: "assets/icons/Bell.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationScreen()));
+                  },
+                ),
+                ProfileMenu(
+                  text: "Orders",
+                  icon: "assets/icons/Settings.svg",
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OrdersScreen()));
+                  },
                 ),
                 ProfileMenu(
                   text: "Settings",
                   icon: "assets/icons/Settings.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> SettingsScreen()));
+                  },
                 ),
                 ProfileMenu(
                   text: "Help Center",

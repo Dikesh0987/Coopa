@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coopa/screens/cart/cart_screen.dart';
 import 'package:coopa/screens/home/components/body.dart';
+import 'package:coopa/screens/notification/notification_screen.dart';
 import 'package:coopa/screens/profile/profile_screen.dart';
 import 'package:coopa/screens/tranding/tranding_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Icon(

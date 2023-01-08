@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20),),
         child: Row(
           children: [
             SizedBox(
