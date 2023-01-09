@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeCard extends StatefulWidget {
+class TrandingCards extends StatefulWidget {
   final String? dp;
   final String? name;
   final String? des;
   final String img;
   final String? hash;
 
-  HomeCard(
+  TrandingCards(
       {Key? key,
       required this.dp,
       required this.name,
@@ -19,15 +19,15 @@ class HomeCard extends StatefulWidget {
       required this.img})
       : super(key: key);
   @override
-  _HomeCardState createState() => _HomeCardState();
+  _TrandingCardsState createState() => _TrandingCardsState();
 }
 
-class _HomeCardState extends State<HomeCard> {
+class _TrandingCardsState extends State<TrandingCards> {
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child: Stack(
         children: [
           ClipRRect(
@@ -46,7 +46,7 @@ class _HomeCardState extends State<HomeCard> {
               },
               blendMode: BlendMode.darken,
               child: Container(
-                height: MediaQuery.of(context).size.width * 1.45,
+                height: MediaQuery.of(context).size.width * 1.25,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -61,18 +61,18 @@ class _HomeCardState extends State<HomeCard> {
           Positioned(
             right: -5,
             top: MediaQuery.of(context).size.shortestSide < 600
-                ? (MediaQuery.of(context).size.width * 1.45 -
+                ? (MediaQuery.of(context).size.width * 1.25 -
                         MediaQuery.of(context).size.width * 1.25) /
                     2
-                : (MediaQuery.of(context).size.width * 1.45 -
+                : (MediaQuery.of(context).size.width * 1.25 -
                         MediaQuery.of(context).size.width * 0.7) /
                     2,
             child: Stack(
               children: [
                 Container(
                   width: MediaQuery.of(context).size.shortestSide < 600
-                      ? 115
-                      : 180,
+                      ? 70
+                      : 100,
                   height: MediaQuery.of(context).size.shortestSide < 600
                       ? MediaQuery.of(context).size.width * 1.25
                       : MediaQuery.of(context).size.width * 0.7,
@@ -95,9 +95,9 @@ class _HomeCardState extends State<HomeCard> {
                     left: 0,
                     child: Padding(
                       padding: EdgeInsets.only(
-                        top: (MediaQuery.of(context).size.width * 1.25) / 8.1,
+                        top: (MediaQuery.of(context).size.width * 2) / 8.1,
                         bottom:
-                            (MediaQuery.of(context).size.width * 1.25) / 8.1,
+                            (MediaQuery.of(context).size.width * 2) / 8.1,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -106,17 +106,17 @@ class _HomeCardState extends State<HomeCard> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: Colors.white.withOpacity(0.4),
+                                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.4),
                               ),
-                              height: 60,
-                              width: 60,
+                              height: 45,
+                              width: 45,
                               child: Padding(
                                   padding: const EdgeInsets.all(17.0),
                                   child: SvgPicture.asset(
                                     isLiked
                                         ? "assets/icons/heart-shape-silhouette.svg"
                                         : "assets/icons/heart-shape-outine.svg",
-                                    color: Color(0xffffffff),
+                                    color: Color.fromARGB(255, 207, 9, 9),
                                   )),
                             ),
                             onTap: () {
@@ -128,10 +128,10 @@ class _HomeCardState extends State<HomeCard> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              color: Colors.white.withOpacity(0.4),
+                              color: Color.fromARGB(255, 158, 27, 27).withOpacity(0.4),
                             ),
-                            height: 60,
-                            width: 60,
+                            height: 45,
+                            width: 45,
                             child: Padding(
                               padding: const EdgeInsets.all(17.0),
                               child: SvgPicture.asset(
@@ -145,8 +145,8 @@ class _HomeCardState extends State<HomeCard> {
                               borderRadius: BorderRadius.circular(100),
                               color: Colors.white.withOpacity(0.4),
                             ),
-                            height: 60,
-                            width: 60,
+                            height: 45,
+                            width: 45,
                             child: Padding(
                               padding: const EdgeInsets.all(17.0),
                               child: SvgPicture.asset(
@@ -160,8 +160,8 @@ class _HomeCardState extends State<HomeCard> {
                               borderRadius: BorderRadius.circular(100),
                               color: Colors.white.withOpacity(0.4),
                             ),
-                            height: 60,
-                            width: 60,
+                            height: 45,
+                            width: 45,
                             child: Padding(
                               padding: const EdgeInsets.all(17.0),
                               child: SvgPicture.asset(

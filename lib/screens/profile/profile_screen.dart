@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:coopa/components/coustom_bottom_nav_bar.dart';
 import 'package:coopa/enums.dart';
 
 import 'components/body.dart';

@@ -1,4 +1,4 @@
-import 'package:coopa/screens/tranding/components/tranding_card.dart';
+import 'package:coopa/screens/tranding/components/tranding_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,23 +14,26 @@ class _TrandingScreenState extends State<TrandingScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          HomeCard(
-            dp: "hgdg",
-            name: "hgj",
-            img: "assets/images/glap.png",
-            des: "hfg",
-            hash: "ddf",
-          ),
-          HomeCard(
-            dp: "hgdg",
-            name: "hgj",
-            img: "assets/images/glap.png",
-            des: "hfg",
-            hash: "ddf",
-          )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 60),
+        child: Column(
+          children: [
+            TrandingCards(
+              dp: "hgdg",
+              name: "hgj",
+              img: "assets/images/tshirt.png",
+              des: "hfg",
+              hash: "ddf",
+            ),
+            TrandingCards(
+              dp: "hgdg",
+              name: "hgj",
+              img: "assets/images/tshirt.png",
+              des: "hfg",
+              hash: "ddf",
+            )
+          ],
+        ),
       ),
     );
   }

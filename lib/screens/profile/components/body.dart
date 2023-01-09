@@ -3,6 +3,7 @@ import 'package:coopa/screens/notification/notification_screen.dart';
 import 'package:coopa/screens/orders/orders_screen.dart';
 import 'package:coopa/screens/settings/settings_screen.dart';
 import 'package:coopa/screens/splash/splash_screen.dart';
+import 'package:coopa/screens/test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _BodyState extends State<Body> {
                                 Text(
                                   '${data['firstname']} ${data['secondname']}',
                                   style: TextStyle(
-                                      fontSize: 18,overflow: TextOverflow.ellipsis,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -66,7 +67,7 @@ class _BodyState extends State<Body> {
                                 ),
                                 Text(
                                   "+91 ${data['phone']}",
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(fontSize: 18),
                                 )
                               ],
                             ),
@@ -87,7 +88,7 @@ class _BodyState extends State<Body> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => NotificationScreen()));
+                            builder: (context) => ReadDataFromFirestore()));
                   },
                 ),
                 ProfileMenu(
@@ -104,7 +105,10 @@ class _BodyState extends State<Body> {
                   text: "Settings",
                   icon: "assets/icons/Settings.svg",
                   press: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> SettingsScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SettingsScreen()));
                   },
                 ),
                 ProfileMenu(
