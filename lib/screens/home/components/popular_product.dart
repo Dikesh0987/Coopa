@@ -6,6 +6,10 @@ import '../../../size_config.dart';
 import 'section_title.dart';
 
 class PopularProducts extends StatelessWidget {
+  var brnadName;
+
+  PopularProducts({Key? key, required this.brnadName}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,7 +17,7 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Popular Products", press: () {}),
+          child: SectionTitle(title: "$brnadName Products", press: () {}),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(

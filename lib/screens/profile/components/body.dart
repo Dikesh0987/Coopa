@@ -1,19 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coopa/components/shimmer_effect.dart';
 import 'package:coopa/screens/notification/notification_screen.dart';
 import 'package:coopa/screens/orders/orders_screen.dart';
 import 'package:coopa/screens/settings/settings_screen.dart';
 import 'package:coopa/screens/splash/splash_screen.dart';
 import 'package:coopa/screens/test.dart';
+import 'package:coopa/screens/user_details/user_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/scheduler.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatefulWidget {
   @override
   State<Body> createState() => _BodyState();
-}
+} 
 
 class _BodyState extends State<Body> {
   final _auth = FirebaseAuth.instance;
@@ -79,7 +81,9 @@ class _BodyState extends State<Body> {
                 ProfileMenu(
                   text: "My Account",
                   icon: "assets/icons/User Icon.svg",
-                  press: () => {},
+                  press: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> UesrDetailsScreen()))
+                  },
                 ),
                 ProfileMenu(
                   text: "Notifications",
@@ -114,7 +118,9 @@ class _BodyState extends State<Body> {
                 ProfileMenu(
                   text: "Help Center",
                   icon: "assets/icons/Question mark.svg",
-                  press: () {},
+                  press: () {
+                  
+                  },
                 ),
                 ProfileMenu(
                   text: "Log Out",
@@ -134,7 +140,8 @@ class _BodyState extends State<Body> {
           );
         }
 
-        return Text("loading");
+        // return ShimmerList();
+        return Center(child: CircularProgressIndicator());
       },
     );
   }

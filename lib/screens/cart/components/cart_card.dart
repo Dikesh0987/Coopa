@@ -40,20 +40,46 @@ class CartCard extends StatelessWidget {
               maxLines: 2,
             ),
             SizedBox(height: 10),
-            Text.rich(
-              TextSpan(
-                text: "\$${cart.product.price}",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600, color: kPrimaryColor),
-                children: [
+            Row(
+              children: [
+                Text.rich(
                   TextSpan(
-                      text: " x${cart.numOfItem}",
-                      style: Theme.of(context).textTheme.bodyText1),
-                ],
-              ),
+                    text: "\$${cart.product.price}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, color: kPrimaryColor),
+                    children: [
+                      TextSpan(
+                          text: " x${cart.numOfItem}",
+                          style: Theme.of(context).textTheme.bodyText1),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Icon(Icons.remove),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Icon(Icons.add),
+                )
+              ],
             )
           ],
         )
+        ,
+        
       ],
     );
   }

@@ -20,10 +20,10 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: kPrimaryColor,
+          primary: Colors.black,
           padding: EdgeInsets.all(20),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           backgroundColor: Color(0xFFF5F6F9),
         ),
         onPressed: press,
@@ -31,11 +31,12 @@ class ProfileMenu extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              color: kPrimaryColor,
+              color: Colors.black,
               width: 22,
+              
             ),
             SizedBox(width: 20),
-            Expanded(child: Text(text)),
+            Expanded(child: Text(text,style: TextStyle(fontSize: 16),)),
             Icon(Icons.arrow_forward_ios),
           ],
         ),

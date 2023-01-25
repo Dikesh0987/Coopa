@@ -10,7 +10,7 @@ class DiscountBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 90,
+      height: 160,
       width: double.infinity,
       margin: EdgeInsets.all(getProportionateScreenWidth(20)),
       padding: EdgeInsets.symmetric(
@@ -18,7 +18,7 @@ class DiscountBanner extends StatelessWidget {
         vertical: getProportionateScreenWidth(15),
       ),
       decoration: BoxDecoration(
-        color: Color(0xFF4A3298),
+        color: Color.fromARGB(255, 139, 133, 157),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text.rich(

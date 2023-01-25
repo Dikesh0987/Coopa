@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:coopa/screens/test2.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class ProfilePic extends StatelessWidget {
   const ProfilePic({
@@ -33,8 +39,10 @@ class ProfilePic extends StatelessWidget {
                   primary: Colors.white,
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
-                onPressed: () {},
-                child: SvgPicture.asset("assets/icons/Camera Icon.svg"),
+                onPressed: () async{
+                  
+                },
+                child: SvgPicture.asset("assets/icons/Camera Icon.svg",color: Colors.black,),
               ),
             ),
           )
